@@ -22,15 +22,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', function() {
-    if(auth()->user()->role == 'admin') {
+Route::get('/home', function () {
+    if (auth()->user()->role == 'admin') {
         return redirect('/admin');
     }
     return redirect('/user');
 })->name('home');
 
 // Admin Routes
-Route::get('/admin', [AdminController::class, 'index']);
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index']);
+});
+
 
 // User Routes
-Route::get('/user', [UserController::class, 'index']);
+Route::middleware(['role:user'])->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+});
