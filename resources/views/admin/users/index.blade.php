@@ -25,9 +25,11 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <a href="{{ route('admin.user.delete', ['id' => $user->id]) }}">
-                                        <button class="btn btn-sm btn-secondary">Delete</button>
-                                    </a>
+                                    <form method="POST" action="{{ route('admin.user.delete', ['id' => $user->id]) }}">
+                                        @csrf
+                                        @method('POST')
+                                        <button type="submit" class="btn btn-sm btn-secondary">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

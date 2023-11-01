@@ -22,6 +22,7 @@ class VoteController extends Controller
                 'error' => 'You have already submitted the vote!',
             ], 400);
         }
+        
         Vote::create([
             'user_id' => auth()->user()->id,
             'feedback_id' => $id,

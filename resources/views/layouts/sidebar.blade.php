@@ -16,13 +16,13 @@ $currentRouteName = Route::getCurrentRoute()->getName();
     </li>
     <hr class="sidebar-divider d-none d-md-block">
     <li class="nav-item {{ str_contains($currentRouteName, 'stocks') ? 'active' : '' }}">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.feedbacks') }}">
             <i class="fas fa-users"></i>
             <span>Feedback Items</span></a>
     </li>
     <hr class="sidebar-divider d-none d-md-block">
     <li class="nav-item {{ str_contains($currentRouteName, 'stocks') ? 'active' : '' }}">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.settings') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Settings</span></a>
     </li>

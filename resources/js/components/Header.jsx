@@ -1,11 +1,41 @@
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Header() {
+    const logout = async () => {
+        try {
+            const response = await fetch("/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.head.querySelector(
+                        'meta[name="csrf-token"]'
+                    )?.content,
+                },
+            });
+
+            if (response.ok) {
+                window.location.href = "/login";
+            } else {
+                toast.error("Something went wrong!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+        } catch (error) {
+            toast.error("Something went wrong!", {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+        }
+    };
+
     return (
         <div id="app">
             <nav className="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
                 <div className="container">
-                    <a className="navbar-brand" href='/user'>Product Feedback Tool</a>
+                    <a className="navbar-brand" href="/user">
+                        Product Feedback Tool
+                    </a>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -29,12 +59,19 @@ function Header() {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/user/feedback/create">
+                                <a
+                                    className="nav-link"
+                                    href="/user/feedback/create"
+                                >
                                     Submit Feedback
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">
+                                <a
+                                    className="nav-link"
+                                    href="#"
+                                    onClick={logout}
+                                >
                                     Logout
                                 </a>
                             </li>
@@ -42,6 +79,7 @@ function Header() {
                     </div>
                 </div>
             </nav>
+            <ToastContainer />
         </div>
     );
 }

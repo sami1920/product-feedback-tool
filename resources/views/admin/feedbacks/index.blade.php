@@ -13,9 +13,10 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">TYPE</th>
+                            <th scope="col">TITLE</th>
+                            <th scope="col">CATEGORY</th>
                             <th scope="col">VOTES</th>
+                            <th scope="col">AUTHOR</th>
                             <th scope="col">ACTION</th>
                         </tr>
                     </thead>
@@ -23,20 +24,23 @@
                         @foreach ($feedbacks as $index => $feedback)
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ $feedback->name }}</td>
-                                <td>{{ $feedback->type }}</td>
-                                <td>{{ $feedback->votes }}</td>
+                                <td>{{ $feedback->title }}</td>
+                                <td>{{ $feedback->category }}</td>
+                                <td>{{ $feedback->votes_count }}</td>
+                                <td>{{ $feedback->user->name }}</td>
                                 <td>
-                                    <a href="{{ route('admin.feedback.delete', ['id' => $feedback->id]) }}">
-                                        <button class="btn btn-sm btn-secondary">Delete</button>
-                                    </a>
+                                    <form method="POST" action="{{ route('admin.feedback.delete', ['id' => $feedback->id]) }}">
+                                        @csrf
+                                        @method('POST')
+                                        <button type="submit" class="btn btn-sm btn-secondary">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    {!! $users->links('pagination::bootstrap-4') !!}
+                    {!! $feedbacks->links('pagination::bootstrap-4') !!}
                 </div>
             </div>
         </div>
