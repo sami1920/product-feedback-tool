@@ -21,6 +21,63 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+# Product Feedback Tool
+
+## Features Implemented:
+
+### User Authentication
+
+- Implemented user authentication and authorization.
+- Users can register, log in, and log out.
+- Only authenticated users can submit feedback and vote on existing feedback.
+
+### Feedback Submission
+
+- Created a user-friendly form for submitting feedback.
+- Feedback includes a title, description, and a category (e.g., bug report, feature request, improvement, etc.).
+- Implemented validation to ensure required fields are filled out.
+
+### Feedback Listing
+
+- Displayed feedback items in a paginated list.
+- Each feedback item shows its title, category, vote count, and the user who submitted it.
+
+### Commenting System
+
+- Enabled users to leave comments on feedback items.
+- Comments include the user's name, date, and content.
+
+### Admin Panel
+
+- Created an admin panel with appropriate authentication.
+- Admins can list & delete users, feedback items, and enable/disable comments.
+
+### Bonus Features
+
+- Implemented advanced commenting features:
+  - Allowed users to mention other users in comments using the "@" symbol.
+
+### User Experience (UX)
+
+- Ensured the tool is responsive and works well on both desktop and mobile devices.
+- Created an intuitive and user-friendly interface for users to navigate and interact with the tool.
+
+### Tech Stack Used
+
+- Laravel for the backend, including the admin panel.
+- Blade templates for the admin panel.
+- React with Vite for the user panel and authentication modules.
+- Used both Blade templates and React to demonstrate versatility and skill sets.
+
+## Getting Started
+
+1. Clone this repository.
+2. Install the necessary dependencies for the Laravel and React parts of the project.
+3. Configure your environment variables, including database settings.
+4. Run the database seeder to populate initial data.
+5. Start the Laravel server and the React development server.
+6. Access the application in your web browser.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
