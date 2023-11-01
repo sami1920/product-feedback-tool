@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\User\FeedbackController as UserFeedbackController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\VoteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,4 +50,7 @@ Route::middleware(['role:user', 'auth'])->group(function () {
     // Feedback Form
     Route::get('/user/feedback/create', [UserFeedbackController::class, 'create'])->name('user.feedbacks.create');
     Route::post('/user/feedback/store', [UserFeedbackController::class, 'store'])->name('user.feedbacks.store');
+
+    // Submit Vote
+    Route::get('/user/vote/store/{id}', [VoteController::class, 'store'])->name('user.votes.store');
 });

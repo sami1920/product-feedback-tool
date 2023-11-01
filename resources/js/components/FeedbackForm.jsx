@@ -69,7 +69,7 @@ function FeedbacksList() {
                     });
                 })
                 .catch((error) => {
-                    toast.error('Feedback Submitted Successfully!', {
+                    toast.error('Something went wrong!', {
                         position: toast.POSITION.TOP_RIGHT
                     });
                 });

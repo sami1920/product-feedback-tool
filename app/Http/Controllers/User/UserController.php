@@ -15,7 +15,7 @@ class UserController extends Controller
 
     public function getPaginatedFeedbacks()
     {
-        $feedbacks = Feedback::with('user')->paginate(8);
+        $feedbacks = Feedback::with('user')->withCount('votes')->paginate(8);
         return $feedbacks;
     }
 }

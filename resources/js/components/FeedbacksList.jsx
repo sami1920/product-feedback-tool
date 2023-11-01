@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./Header";
 import Pagination from "react-js-pagination";
-import Table from 'react-bootstrap/Table';
+import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
-import Badge from 'react-bootstrap/Badge';
+import Badge from "react-bootstrap/Badge";
+import Feedback from "./Feedback";
 
 function FeedbacksList() {
+    const [showFeedback, setShowFeedback] = useState(false);
+    const [selectedFeedback, setSelectedFeedback] = useState(null);
     const [list, setList] = useState({
         feedbacks: {
             data: [],
@@ -24,23 +27,29 @@ function FeedbacksList() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(list);
-    }, [list]);
+    const viewFeedback = (feedback) => {
+        setSelectedFeedback(feedback);
+        setShowFeedback(true);
+    };
+
+    const handleCloseFeedback = () => {
+        setSelectedFeedback(null);
+        setShowFeedback(false);
+    };
 
     return (
         <>
             <Header />
             <div className="d-flex justify-content-center my-5">
-                <div className="col-md-7 col-sm-12">
+                <div className="col-md-10 col-sm-12 px-5">
                     <h2>Feedbacks List</h2>
                     <Table striped bordered hover className="my-3">
                         <thead>
                             <tr>
                                 <th>Title</th>
                                 <th>Category</th>
-                                <th>Description</th>
-                                <th>Submitted By</th>
+                                <th>Votes</th>
+                                <th>Author</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -49,11 +58,19 @@ function FeedbacksList() {
                                 list?.feedbacks?.data?.map((feedback) => (
                                     <tr key={feedback?.id}>
                                         <td>{feedback?.title}</td>
-                                        <td><Badge bg="success">{feedback?.category}</Badge></td>
-                                        <td>{feedback?.description.substring(0,8)}...</td>
+                                        <td>
+                                            <Badge bg="success">
+                                                {feedback?.category}
+                                            </Badge>
+                                        </td>
+                                        <td>
+                                            {feedback?.votes_count}
+                                        </td>
                                         <td>{feedback?.user.name}</td>
                                         <td>
-                                            <Button size="sm" variant="primary">View</Button>
+                                            <Button size="sm" variant="primary" onClick={() => {viewFeedback(feedback)}}>
+                                                View
+                                            </Button>
                                         </td>
                                     </tr>
                                 ))
@@ -91,6 +108,12 @@ function FeedbacksList() {
                             lastPageText="Last Lage"
                         />
                     </div>
+                    {showFeedback && (
+                        <Feedback
+                            feedback={selectedFeedback}
+                            onClose={handleCloseFeedback}
+                        />
+                    )}
                 </div>
             </div>
         </>
