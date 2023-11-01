@@ -1,30 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
+import Layout from './Layout';
 
 function Example() {
+    // useEffect(() => {
+    //     console.log(props);
+    // }, [])
+    
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Example Component</div>
-
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Layout />
     );
 }
 
 export default Example;
 
-if (document.getElementById('example')) {
-    const Index = ReactDOM.createRoot(document.getElementById("example"));
-
+if (document.getElementById('user-panel')) {
+    const Index = ReactDOM.createRoot(document.getElementById("user-panel"));
+    const data = document.getElementById('user-panel').getAttribute('data');
     Index.render(
         <React.StrictMode>
-            <Example/>
+            <Example />
         </React.StrictMode>
     )
 }
