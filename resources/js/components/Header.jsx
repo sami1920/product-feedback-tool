@@ -1,9 +1,8 @@
 import React from "react";
 
-function Layout() {
+function Header() {
     return (
         <div id="app">
-            {/* Header */}
             <nav className="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
                 <div className="container">
                     <a className="navbar-brand" href='/user'>Product Feedback Tool</a>
@@ -25,12 +24,12 @@ function Layout() {
                         <ul className="navbar-nav me-auto"></ul>
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="#">
+                                <a className="nav-link" href="/user">
                                     Feedbacks
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">
+                                <a className="nav-link" href="/user/feedback/create">
                                     Submit Feedback
                                 </a>
                             </li>
@@ -47,4 +46,4 @@ function Layout() {
     );
 }
 
-export default Layout;
+export default Header;

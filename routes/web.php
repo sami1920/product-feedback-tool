@@ -4,20 +4,10 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\User\FeedbackController as UserFeedbackController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,5 +42,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // User Routes
 Route::middleware(['role:user', 'auth'])->group(function () {
+    // Feedbacks List
     Route::get('/user', [UserController::class, 'index']);
+    Route::get('/user/feedbacks', [UserController::class, 'getPaginatedFeedbacks']);
+
+    // Feedback Form
+    Route::get('/user/feedback/create', [UserFeedbackController::class, 'create'])->name('user.feedbacks.create');
+    Route::post('/user/feedback/store', [UserFeedbackController::class, 'store'])->name('user.feedbacks.store');
 });
