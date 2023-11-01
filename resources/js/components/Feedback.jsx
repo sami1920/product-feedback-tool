@@ -2,10 +2,28 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
 import Modal from "react-bootstrap/Modal";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+    Mention,
+    MentionsInput,
+} from "react-mentions/dist/react-mentions.cjs.prod";
+import styles from "../../css/styles.module.css";
 
 function Feedback({ feedback, onClose }) {
+    const [comment, setComment] = useState("");
+
+    const data = [
+        {
+            id: "Avatar",
+            display: "Avatar Aang",
+        },
+        {
+            id: "Spiderman",
+            display: "Peter Parker",
+        },
+    ];
+
     const submitVote = () => {
         fetch("/user/vote/store/" + feedback.id, {
             method: "GET",
@@ -14,7 +32,7 @@ function Feedback({ feedback, onClose }) {
                 "X-CSRF-TOKEN": document.head.querySelector(
                     'meta[name="csrf-token"]'
                 )?.content,
-            }
+            },
         })
             .then((response) => {
                 if (response.ok) {
@@ -46,7 +64,11 @@ function Feedback({ feedback, onClose }) {
                             <h5 className="m-0">Category:</h5>
                             <Badge bg="success">{feedback?.category}</Badge>
                         </div>
-                        <Button variant="secondary" size="sm" onClick={submitVote}>
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={submitVote}
+                        >
                             Vote
                         </Button>
                     </div>
@@ -57,6 +79,18 @@ function Feedback({ feedback, onClose }) {
                     <hr />
                     <div className="row">
                         <h3 className="text-center">Add Comment</h3>
+                        <div className="richtextarea px-5">
+                            <MentionsInput
+                                classNames={styles}
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                            >
+                                <Mention
+                                    data={data}
+                                    className="text-bold fs-10"
+                                />
+                            </MentionsInput>
+                        </div>
                     </div>
                 </Modal.Body>
             </Modal>
